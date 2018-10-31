@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {TopBar} from './TopBar';
-import './App.css';
+import '../styles/App.css';
 import {Register} from './Registration';
 import {Main} from'./Main';
 
