@@ -1,7 +1,9 @@
-import { Form, Icon, Input, Button,} from 'antd';
+import { Form, Icon, Input, Button,message} from 'antd';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {API_ROOT} from "../constants";
 const FormItem = Form.Item;
+
 
 class NormalLoginForm extends React.Component {
     handleSubmit = (e) => {
@@ -9,6 +11,24 @@ class NormalLoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                fetch(`${API_ROOT}/login`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        username: values.username,
+                        password: values.password,
+                    }),
+                }).then((response)=>{
+                    if(response.ok){
+                        return response.text();
+                    }
+                    throw new Error(response.statusText);
+                }).then((data)=>{
+                    console.log(data);
+                    message.success('Login Success.')
+                }).catch((e)=>{
+                    console.log(e);
+                    message.error('Login failed');
+                });
             }
         });
     }
