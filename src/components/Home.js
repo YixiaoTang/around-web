@@ -1,10 +1,28 @@
 import React from 'react';
 import { Tabs, Button } from 'antd';
+import {GEO_OPTIONS} from "../constants"
 
 const TabPane = Tabs.TabPane;
 
 
 export class Home extends React.Component {
+    componentDidMount(){
+        if("geolocation" in navigator){
+            navigator.geolocation.getCurrentPosition(
+                this.onSuccessLoadGeolocation,
+                this.onFailedLoadGeolocation,
+                GEO_OPTIONS,);
+        }
+        else{
+
+        }
+    }
+    onSuccessLoadGeolocation = (position)=>{
+        console.log(position);
+    }
+    onFailedLoadGeolocation = ()=>{
+
+    }
     render() {
         const operations = <Button type="primary">Create new post</Button>;
         return (
