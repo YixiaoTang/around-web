@@ -60,3 +60,4 @@ class NormalCreatePostForm extends React.Component {
 }
 
 export const CreatePostForm = Form.create()(NormalCreatePostForm);
+
